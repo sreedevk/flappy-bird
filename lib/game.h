@@ -4,7 +4,7 @@
 #include <SDL2/SDL_image.h>
 #include <string>
 
-#define FRAMERATE 15
+#define FRAMERATE 12
 #define SCREEN_HEIGHT 512
 #define SCREEN_WIDTH 288
 

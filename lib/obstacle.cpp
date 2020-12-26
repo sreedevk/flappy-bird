@@ -1,14 +1,15 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "obstacle.h"
+#include "base.h"
 
 void Obstacle::loadTexture(){
   this->surface = IMG_Load("assets/sprites/pipe-green.png");
 }
 
-void Obstacle::computeDstRect(){
-  this->dstRect.y = rand() % (int)(0.5 * (SCREEN_HEIGHT - BASE_HEIGHT));
-  this->dstRect.x = OBSTACLE_START_COORD;
+void Obstacle::computeDstRect(int xOffset){
+  this->dstRect.y = (rand() % ((SCREEN_HEIGHT - BASE_HEIGHT) - (BASE_HEIGHT) + 1)) + BASE_HEIGHT;
+  this->dstRect.x = OBSTACLE_START_COORD + xOffset;
   this->dstRect.w = OBSTACLE_WIDTH;
   this->dstRect.h = OBSTACLE_HEIGHT;
 }

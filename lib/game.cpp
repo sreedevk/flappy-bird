@@ -1,12 +1,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <cstdlib>
 #include <string>
 #include "game.h"
 #include "bird.h"
 #include "background.h"
 #include "base.h"
-#include "obstacle.h"
 #include <array>
+#include "obstacle_manager.h"
+#include <iostream>
 
 int Game::computeDelay() {
   if(this->frameTime > this->frameDelay) {
@@ -24,7 +26,20 @@ void Game::computeStatus(void *bird) {
 
 void Game::handleEvents() {
   while(SDL_PollEvent(&this->currentEvent)){
-    if(currentEvent.type == SDL_QUIT) this->running = false;
+    switch(currentEvent.type) {
+      case SDL_QUIT:
+        this->running = false;
+        break;
+      case SDL_KEYDOWN:
+        switch(currentEvent.key.keysym.sym) {
+          case SDLK_ESCAPE:
+            this->running = false;
+            break;
+        }
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -32,19 +47,22 @@ void Game::run() {
   Bird *bird = new Bird(this->renderer);
   Base *base = new Base(this->renderer);
   Background *background = new Background(this->renderer, DAY);
-  Obstacle *obstacle = new Obstacle(this->renderer);
+  ObstacleManager *obstacle_man = new ObstacleManager(this->renderer);
+  const Uint8 *state = SDL_GetKeyboardState(NULL);
 
   while(this->running) {
     this->frameStart = SDL_GetTicks();
     /* handle Keyboard | Quit Events */
     handleEvents();
+    SDL_PumpEvents();
+    state[SDL_SCANCODE_SPACE] ? bird->jump() : bird->fall();
 
     /* clear Renderer */
     SDL_RenderClear(this->renderer);
 
     /* render entities */
     background->render();
-    obstacle->render();
+    obstacle_man->renderObstacles();
     base->render();
     bird->render();
 

@@ -17,16 +17,23 @@ class Bird {
     int currentStatus;
     SDL_Rect dstRect;
     bool birdAlive;
+    int controlSpeed;
+    int fallSpeed;
 
     void loadDefaults();
     void loadTexture(std::string);
     void updateFrame();
     void updatePosition(int, int);
     void render();
+    void kill();
+    void jump();
+    void fall();
 
     Bird(SDL_Renderer *renderer){
       this->loadDefaults();
       this->birdAlive = true;
+      this->controlSpeed = 12;
+      this->fallSpeed = 12;
       this->gameRenderer = renderer;
       this->currentStatus = 0;
       this->updatePosition((SCREEN_WIDTH/2)-(BIRD_WIDTH/2), (SCREEN_HEIGHT/2) - (BIRD_HEIGHT/2));

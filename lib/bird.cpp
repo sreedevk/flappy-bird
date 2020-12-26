@@ -39,3 +39,11 @@ void Bird::render(){
   SDL_RenderCopy(this->gameRenderer, this->texture, NULL, &this->dstRect);
   SDL_DestroyTexture(this->texture);
 }
+
+void Bird::jump(){
+  this->dstRect.y -= this->controlSpeed; 
+}
+
+void Bird::fall(){
+  this->dstRect.y += this->fallSpeed;
+}

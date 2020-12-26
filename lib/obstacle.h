@@ -17,14 +17,14 @@ class Obstacle {
     SDL_Rect srcRect, dstRect;
 
     void loadTexture();
-    void computeDstRect();
+    void computeDstRect(int xOffset);
     void updateFrame();
     void render();
     void updatePosition();
 
-    Obstacle(SDL_Renderer *renderer){
+    Obstacle(SDL_Renderer *renderer, int xOffset){
       this->gameRenderer = renderer;
-      this->computeDstRect();
+      this->computeDstRect(xOffset);
       this->speed = 10;
     }
 };
