@@ -1,10 +1,12 @@
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <string>
 #include "game.h"
 #include "bird.h"
 #include "background.h"
 #include "base.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <string>
+#include "obstacle.h"
+#include <array>
 
 int Game::computeDelay() {
   if(this->frameTime > this->frameDelay) {
@@ -30,6 +32,7 @@ void Game::run() {
   Bird *bird = new Bird(this->renderer);
   Base *base = new Base(this->renderer);
   Background *background = new Background(this->renderer, DAY);
+  Obstacle *obstacle = new Obstacle(this->renderer);
 
   while(this->running) {
     this->frameStart = SDL_GetTicks();
@@ -41,6 +44,7 @@ void Game::run() {
 
     /* render entities */
     background->render();
+    obstacle->render();
     base->render();
     bird->render();
 
