@@ -5,8 +5,8 @@
 #include <string>
 #include "game.h"
 
-#define BIRD_WIDTH 80
-#define BIRD_HEIGHT 64
+#define BIRD_WIDTH 32
+#define BIRD_HEIGHT 24
 
 class Bird {
   public:

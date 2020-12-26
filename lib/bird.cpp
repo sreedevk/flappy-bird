@@ -37,4 +37,5 @@ void Bird::updatePosition(int x, int y) {
 void Bird::render(){
   this->updateFrame();
   SDL_RenderCopy(this->gameRenderer, this->texture, NULL, &this->dstRect);
+  SDL_DestroyTexture(this->texture);
 }

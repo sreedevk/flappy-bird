@@ -5,8 +5,8 @@
 #include <string>
 
 #define FRAMERATE 10
-#define SCREEN_HEIGHT 600
-#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 512
+#define SCREEN_WIDTH 288
 
 class Game {
   public:
@@ -14,7 +14,7 @@ class Game {
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     SDL_Surface *surface;
-    SDL_Event e;
+    SDL_Event currentEvent;
     int frameDelay;
     Uint32 frameStart;
     int frameTime; 
@@ -23,6 +23,7 @@ class Game {
 
     SDL_Texture *loadTexture(std::string file);
     void         run();
+    void         handleEvents();
     void         computeStatus(void *);
     int          computeDelay();
 
