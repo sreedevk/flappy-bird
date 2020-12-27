@@ -9,6 +9,7 @@
 #include <array>
 #include "obstacle_manager.h"
 #include "init_overlay.h"
+#include "score_card.h"
 #include <iostream>
 
 int Game::computeDelay() {
@@ -52,6 +53,7 @@ void Game::run() {
   Bird *bird = new Bird(this->renderer);
   Base *base = new Base(this->renderer);
   Background *background = new Background(this->renderer, DAY);
+  ScoreCard *score_card = new ScoreCard(this->renderer);
   InitOverlay *init_overlay = new InitOverlay(this->renderer);
   ObstacleManager *obstacle_man = new ObstacleManager(this->renderer);
   const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -68,6 +70,7 @@ void Game::run() {
     /* render entities */
     background->render();
     if(this->gameStarted) {
+      score_card->render();
       obstacle_man->renderObstacles();
       state[SDL_SCANCODE_SPACE] ? bird->jump() : bird->fall();
     } else {
