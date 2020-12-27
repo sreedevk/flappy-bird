@@ -8,6 +8,7 @@
 #include "base.h"
 #include <array>
 #include "obstacle_manager.h"
+#include "init_overlay.h"
 #include <iostream>
 
 int Game::computeDelay() {
@@ -19,8 +20,9 @@ int Game::computeDelay() {
 }
 
 void Game::computeStatus(void *bird) {
-  if(!((Bird *) bird)->birdAlive) {
-    this->running = false;
+  Bird *bird_obj = (Bird *) bird;
+  if(!bird_obj->birdAlive) {
+    this->gameOver = true;
   }
 }
 
@@ -35,6 +37,9 @@ void Game::handleEvents() {
           case SDLK_ESCAPE:
             this->running = false;
             break;
+          case SDLK_SPACE:
+            this->gameStarted = true;
+            break;
         }
         break;
       default:
@@ -47,6 +52,7 @@ void Game::run() {
   Bird *bird = new Bird(this->renderer);
   Base *base = new Base(this->renderer);
   Background *background = new Background(this->renderer, DAY);
+  InitOverlay *init_overlay = new InitOverlay(this->renderer);
   ObstacleManager *obstacle_man = new ObstacleManager(this->renderer);
   const Uint8 *state = SDL_GetKeyboardState(NULL);
 
@@ -55,16 +61,21 @@ void Game::run() {
     /* handle Keyboard | Quit Events */
     handleEvents();
     SDL_PumpEvents();
-    state[SDL_SCANCODE_SPACE] ? bird->jump() : bird->fall();
 
     /* clear Renderer */
     SDL_RenderClear(this->renderer);
 
     /* render entities */
     background->render();
-    obstacle_man->renderObstacles();
+    if(this->gameStarted) {
+      obstacle_man->renderObstacles();
+      state[SDL_SCANCODE_SPACE] ? bird->jump() : bird->fall();
+    } else {
+      init_overlay->render();
+    }
     base->render();
     bird->render();
+    bird->updateBirdLife();
 
     /* render renderer to display */
     SDL_RenderPresent(this->renderer);

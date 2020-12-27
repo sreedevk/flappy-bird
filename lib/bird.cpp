@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include "bird.h"
 #include "game.h"
+#include "base.h"
 
 void Bird::loadTexture(std::string flap_status){
   if(flap_status == "up") {
@@ -46,4 +47,11 @@ void Bird::jump(){
 
 void Bird::fall(){
   this->dstRect.y += this->fallSpeed;
+}
+
+void Bird::updateBirdLife(){
+  bool groundFall = (this->dstRect.y >= (SCREEN_HEIGHT - (BASE_HEIGHT + BIRD_HEIGHT)));
+  if(groundFall) {
+    this->birdAlive = false;
+  }
 }

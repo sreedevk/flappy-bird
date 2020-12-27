@@ -19,6 +19,8 @@ class Game {
     Uint32 frameStart;
     int frameTime; 
     bool running;
+    bool gameStarted;
+    bool gameOver;
     int flags;
 
     SDL_Texture *loadTexture(std::string file);
@@ -33,6 +35,8 @@ class Game {
       this->window   = SDL_CreateWindow("FlappyBird", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, this->flags);
       this->renderer = SDL_CreateRenderer(this->window, -1, 0);
       this->running = true;
+      this->gameStarted = false;
+      this->gameOver = false;
       this->frameDelay = 1000/FRAMERATE;
     }
 

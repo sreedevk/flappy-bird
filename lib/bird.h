@@ -28,6 +28,7 @@ class Bird {
     void kill();
     void jump();
     void fall();
+    void updateBirdLife();
 
     Bird(SDL_Renderer *renderer){
       this->loadDefaults();
