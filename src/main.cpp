@@ -11,5 +11,6 @@ Game *game;
 int main(){
   game = new Game;
   game->run();
+
   return EXIT_SUCCESS;
 }

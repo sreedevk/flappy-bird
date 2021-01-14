@@ -8,6 +8,7 @@
 #define SCREEN_HEIGHT 512
 #define SCREEN_WIDTH 288
 
+
 class Game {
   public:
     SDL_Window *window;

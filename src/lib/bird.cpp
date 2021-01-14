@@ -46,7 +46,9 @@ void Bird::jump(){
 }
 
 void Bird::fall(){
-  this->dstRect.y += this->fallSpeed;
+  if(this->dstRect.y <= (SCREEN_HEIGHT - (BASE_HEIGHT + BIRD_HEIGHT))) {
+    this->dstRect.y += this->fallSpeed;
+  }
 }
 
 void Bird::updateBirdLife(){

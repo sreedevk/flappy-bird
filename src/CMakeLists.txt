@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION "3.19.1")
 project(flappyBird)
 
+set (CMAKE_CXX_STANDARD 11)
 set(LIBRARY_PATHS /usr/include /usr/lib/ usr/local/lib)
 
 find_library(SDL2_LIBRARY
@@ -13,6 +14,10 @@ find_library(SDL2_IMAGE_LIBRARY
   PATHS ${LIBRARY_PATHS}
 )
 
+include_directories(${CMAKE_BINARY_DIR}/assets)
+
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+
 add_library(bird SHARED lib/bird.cpp lib/bird.h)
 add_library(game SHARED lib/game.cpp lib/game.h)
 add_library(background SHARED lib/background.cpp lib/background.h)
@@ -21,7 +26,8 @@ add_library(init_overlay SHARED lib/init_overlay.cpp lib/init_overlay.h)
 add_library(obstacle SHARED lib/obstacle.cpp lib/obstacle.h)
 add_library(obstacle_manager SHARED lib/obstacle_manager.cpp lib/obstacle_manager.h)
 add_library(score_card SHARED lib/score_card.cpp lib/score_card.h)
+add_library(game_over SHARED lib/game_over.cpp lib/game_over.h)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} bird game background base init_overlay obstacle obstacle_manager score_card)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} bird game background base init_overlay obstacle obstacle_manager score_card game_over)

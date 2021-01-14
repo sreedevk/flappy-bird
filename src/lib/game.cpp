@@ -10,6 +10,7 @@
 #include "obstacle_manager.h"
 #include "init_overlay.h"
 #include "score_card.h"
+#include "game_over.h"
 #include <iostream>
 
 int Game::computeDelay() {
@@ -56,6 +57,7 @@ void Game::run() {
   ScoreCard *score_card = new ScoreCard(this->renderer);
   InitOverlay *init_overlay = new InitOverlay(this->renderer);
   ObstacleManager *obstacle_man = new ObstacleManager(this->renderer);
+  GameOver *g_over = new GameOver(this->renderer);
   const Uint8 *state = SDL_GetKeyboardState(NULL);
 
   while(this->running) {
@@ -63,22 +65,25 @@ void Game::run() {
     /* handle Keyboard | Quit Events */
     handleEvents();
     SDL_PumpEvents();
+    if(!this->gameOver) {
+      /* clear Renderer */
+      SDL_RenderClear(this->renderer);
 
-    /* clear Renderer */
-    SDL_RenderClear(this->renderer);
-
-    /* render entities */
-    background->render();
-    if(this->gameStarted) {
-      score_card->render();
-      obstacle_man->renderObstacles();
-      state[SDL_SCANCODE_SPACE] ? bird->jump() : bird->fall();
+      /* render entities */
+      background->render();
+      if(this->gameStarted) {
+        score_card->render();
+        obstacle_man->renderObstacles();
+        state[SDL_SCANCODE_SPACE] ? bird->jump() : bird->fall();
+      } else {
+        init_overlay->render();
+      }
+      base->render();
+      bird->render();
+      bird->updateBirdLife();
     } else {
-      init_overlay->render();
+      g_over->render();
     }
-    base->render();
-    bird->render();
-    bird->updateBirdLife();
 
     /* render renderer to display */
     SDL_RenderPresent(this->renderer);

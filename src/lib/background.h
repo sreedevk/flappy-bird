@@ -4,6 +4,7 @@
 
 #define DAY "day"
 #define NIGHT "night"
+#define ROOT_DIR "./"
 
 class Background {
   public:

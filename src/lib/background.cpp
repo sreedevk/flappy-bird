@@ -1,14 +1,15 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+#include <sstream>
+#include <iostream>
 #include "background.h"
 
 void Background::loadTexture(){
-  if(this->current_mode == DAY) {
-    this->surface = IMG_Load("assets/sprites/background-day.png");
-  } else if (this->current_mode == NIGHT) {
-    this->surface = IMG_Load("assets/sprites/background-night.png");
-  }
+  std::stringstream filepath;
+  filepath << *ROOT_DIR << "/assets/sprites/";
+  filepath << (this->current_mode == DAY ? "background-day.png" : "background-night.png");
+  this->surface = IMG_Load(filepath.str().c_str());
 }
 
 void Background::render(){
