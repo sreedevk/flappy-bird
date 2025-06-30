@@ -1,5 +1,5 @@
-import {  Application, Assets, Sprite,  Texture } from "pixi.js";
-import {  State, Status } from "./game";
+import { Application, Assets, Sprite, Texture } from "pixi.js";
+import { State, Status } from "./game";
 
 const maxheight: number = 512;
 const mapytoangle = (yv: number) =>
@@ -86,7 +86,6 @@ export class Bird {
       this.sprite.texture = this.textures[0];
     } else {
       this.sprite.texture = this.textures[1];
-      j;
     }
 
     this.sprite.rotation = mapytoangle(this.sprite.y);
