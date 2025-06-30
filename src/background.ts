@@ -1,4 +1,4 @@
-import { type Application, Assets, Sprite, type Texture } from "pixi.js";
+import {  Application, Assets, Sprite,  Texture } from "pixi.js";
 
 export class Background {
   public sprite: Sprite;

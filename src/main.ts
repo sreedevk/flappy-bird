@@ -2,7 +2,7 @@ import { Application, Container } from "pixi.js";
 import { Background } from "./background";
 import { Base } from "./base";
 import { Bird } from "./bird";
-import { type State, Status } from "./game";
+import { State, Status } from "./game";
 import { GameOver } from "./gameover";
 import { Overlay } from "./overlay";
 import { Score } from "./score";

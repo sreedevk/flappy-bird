@@ -8,7 +8,8 @@ const builder = async () => {
     bundle: true,
     minify: true,
     sourcemap: false,
-    target: ["es2020"],
+    target: ["esnext"],
+    loader: { '.ts': 'ts' },
     outfile: "./dist/bundle.min.js",
     plugins: [
       clean({

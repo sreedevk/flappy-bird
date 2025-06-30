@@ -1,5 +1,5 @@
-import { type Application, Assets, Sprite } from "pixi.js";
-import { type State, Status } from "./game";
+import {  Application, Assets, Sprite } from "pixi.js";
+import {  State, Status } from "./game";
 
 export class GameOver {
   public sprite: Sprite;
