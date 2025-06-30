@@ -1,10 +1,10 @@
 export enum Status {
-  PreGame,
-  InGame,
-  GameOver
+	PreGame,
+	InGame,
+	GameOver,
 }
 
 export type State = {
-  status: Status,
-  score: number
-}
+	status: Status;
+	score: number;
+};

@@ -9,3 +9,14 @@ project aimed to helping me explore PixiJS.
 1. [ ] Render Pipes & Add Collision Detection
 2. [ ] Fix the bird Y axis acceleration and rotation
 3. [ ] Score update
+
+## Development
+
+```bash
+git clone https://github.com/sreedevk/flappy-bird
+
+cd flappy-bird
+
+bun install
+bun run dev
+```
